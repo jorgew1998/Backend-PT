@@ -18,6 +18,7 @@ class CreateThemesTable extends Migration
             $table->string('title');
             $table->string('difficulty');
             $table->string('advance');
+            $table->timestamps();
         });
     }
 
