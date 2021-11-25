@@ -18,7 +18,8 @@ class CreateContentsTable extends Migration
             $table->string('description');
             $table->string('question');
             $table->string('answer');
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->timestamps();
         });
     }
 
