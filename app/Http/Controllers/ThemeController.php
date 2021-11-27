@@ -11,24 +11,23 @@ class ThemeController extends Controller
     {
         return Theme::all();
     }
-    public function show($id)
+    public function show(Theme $theme)
     {
-        return Theme::find($id);
+        return $theme;
     }
     public function store(Request $request)
     {
-        return Theme::create($request->all());
+        $theme = Theme::create($request->all());
+        return response()->json($theme, 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Theme $theme)
     {
-        $article = Theme::findOrFail($id);
-        $article->update($request->all());
-        return $article;
+        $theme->update($request->all());
+        return response()->json($theme, 200);
     }
-    public function delete(Request $request, $id)
+    public function delete(Theme $theme)
     {
-        $article = Theme::findOrFail($id);
-        $article->delete();
-        return 204;
+        $theme->delete();
+        return response()->json(null, 204);
     }
 }

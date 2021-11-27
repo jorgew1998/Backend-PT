@@ -11,24 +11,23 @@ class ContentController extends Controller
     {
         return Content::all();
     }
-    public function show($id)
+    public function show(Content $content)
     {
-        return Content::find($id);
+        return $content;
     }
     public function store(Request $request)
     {
-        return Content::create($request->all());
+        $content = Content::create($request->all());
+        return response()->json($content, 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Content $content)
     {
-        $article = Content::findOrFail($id);
-        $article->update($request->all());
-        return $article;
+        $content->update($request->all());
+        return response()->json($content, 200);
     }
-    public function delete(Request $request, $id)
+    public function delete(Content $content)
     {
-        $article = Content::findOrFail($id);
-        $article->delete();
-        return 204;
+        $content->delete();
+        return response()->json(null, 204);
     }
 }

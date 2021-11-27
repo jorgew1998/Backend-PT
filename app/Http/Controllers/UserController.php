@@ -11,24 +11,23 @@ class UserController extends Controller
     {
         return User::all();
     }
-    public function show($id)
+    public function show(User $user)
     {
-        return User::find($id);
+        return $user;
     }
     public function store(Request $request)
     {
-        return User::create($request->all());
+        $user = User::create($request->all());
+        return response()->json($user, 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $article = User::findOrFail($id);
-        $article->update($request->all());
-        return $article;
+        $user->update($request->all());
+        return response()->json($user, 200);
     }
-    public function delete(Request $request, $id)
+    public function delete(User $user)
     {
-        $article = User::findOrFail($id);
-        $article->delete();
-        return 204;
+        $user->delete();
+        return response()->json(null, 204);
     }
 }
