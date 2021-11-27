@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+  //  return $request->user();
+//});
 
 
 //Rutas para los temas
@@ -41,7 +41,7 @@ Route::delete('/achievements/{achievement}', [AchievementController::class, 'del
 Route::get('/contents', [ContentController::class, 'index']);
 Route::get('/contents/{content}', [ContentController::class, 'show']);
 Route::post('/contents', [ContentController::class, 'store']);
-Route::put('/contents/{contents}', [ContentController::class, 'update']);
+Route::put('/contents/{content}', [ContentController::class, 'update']);
 Route::delete('/contents/{content}', [ContentController::class, 'delete']);
 
 
@@ -51,3 +51,4 @@ Route::get('/users/{user}', [UserController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);
 Route::put('/users/{user}', [UserController::class, 'update']);
 Route::delete('/users/{user}', [UserController::class, 'delete']);
+

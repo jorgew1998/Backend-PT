@@ -11,24 +11,23 @@ class AchievementController extends Controller
     {
         return Achievement::all();
     }
-    public function show($id)
+    public function show(Achievement $achievement)
     {
-        return Achievement::find($id);
+        return $achievement;
     }
     public function store(Request $request)
     {
-        return Achievement::create($request->all());
+        $achievement = Achievement::create($request->all());
+        return response()->json($achievement, 201);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Achievement $achievement)
     {
-        $article = Achievement::findOrFail($id);
-        $article->update($request->all());
-        return $article;
+        $achievement->update($request->all());
+        return response()->json($achievement, 200);
     }
-    public function delete(Request $request, $id)
+    public function delete(Achievement $achievement)
     {
-        $article = Achievement::findOrFail($id);
-        $article->delete();
-        return 204;
+        $achievement->delete();
+        return response()->json(null, 204);
     }
 }
