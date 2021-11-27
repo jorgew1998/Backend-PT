@@ -23,6 +23,21 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
+//Rutas de autenticacion
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'authenticate']);
+Route::get('/users', [UserController::class, 'index']);
+
+Route::group(['middleware' => ['jwt.verify']], function() {
+
+    //Rutas para usuarios
+    Route::get('/users/{user}', [UserController::class, 'show']);
+    Route::post('/users', [UserController::class, 'store']);
+    Route::put('/users/{user}', [UserController::class, 'update']);
+    Route::delete('/users/{user}', [UserController::class, 'delete']);
+
+});
+
 //Rutas para los temas
 Route::get('/themes', [ThemeController::class, 'index']);
 Route::get('/themes/{theme}', [ThemeController::class, 'show']);
@@ -45,10 +60,5 @@ Route::put('/contents/{content}', [ContentController::class, 'update']);
 Route::delete('/contents/{content}', [ContentController::class, 'delete']);
 
 
-//Rutas para usuarios
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{user}', [UserController::class, 'show']);
-Route::post('/users', [UserController::class, 'store']);
-Route::put('/users/{user}', [UserController::class, 'update']);
-Route::delete('/users/{user}', [UserController::class, 'delete']);
+
 
