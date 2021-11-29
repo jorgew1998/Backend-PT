@@ -26,38 +26,43 @@ use Illuminate\Support\Facades\Route;
 //Rutas de autenticacion
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
-Route::get('/users', [UserController::class, 'index']);
+
 
 Route::group(['middleware' => ['jwt.verify']], function() {
 
     //Rutas para usuarios
+    Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{user}', [UserController::class, 'show']);
     Route::post('/users', [UserController::class, 'store']);
     Route::put('/users/{user}', [UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'delete']);
 
+    //Rutas para los temas
+    Route::get('/themes', [ThemeController::class, 'index']);
+    Route::get('/themes/{theme}', [ThemeController::class, 'show']);
+    Route::post('/themes', [ThemeController::class, 'store']);
+    Route::put('/themes/{theme}', [ThemeController::class, 'update']);
+    Route::delete('/themes/{theme}', [ThemeController::class, 'delete']);
+
+    //Rutas para contenidos
+    Route::get('/contents', [ContentController::class, 'index']);
+    Route::get('/contents/{content}', [ContentController::class, 'show']);
+    Route::post('/contents', [ContentController::class, 'store']);
+    Route::put('/contents/{content}', [ContentController::class, 'update']);
+    Route::delete('/contents/{content}', [ContentController::class, 'delete']);
+
 });
 
-//Rutas para los temas
-Route::get('/themes', [ThemeController::class, 'index']);
-Route::get('/themes/{theme}', [ThemeController::class, 'show']);
-Route::post('/themes', [ThemeController::class, 'store']);
-Route::put('/themes/{theme}', [ThemeController::class, 'update']);
-Route::delete('/themes/{theme}', [ThemeController::class, 'delete']);
+
 
 //Rutas para logros
 Route::get('/achievements', [AchievementController::class, 'index']);
 Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
 Route::post('/achievements', [AchievementController::class, 'store']);
 Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
-Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
+//Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
 
-//Rutas para contenidos
-Route::get('/contents', [ContentController::class, 'index']);
-Route::get('/contents/{content}', [ContentController::class, 'show']);
-Route::post('/contents', [ContentController::class, 'store']);
-Route::put('/contents/{content}', [ContentController::class, 'update']);
-Route::delete('/contents/{content}', [ContentController::class, 'delete']);
+
 
 
 
