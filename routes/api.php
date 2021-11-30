@@ -51,16 +51,16 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('/contents/{content}', [ContentController::class, 'update']);
     Route::delete('/contents/{content}', [ContentController::class, 'delete']);
 
+    //Rutas para logros
+    Route::get('/achievements', [AchievementController::class, 'index']);
+    Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
+    Route::post('/achievements', [AchievementController::class, 'store']);
+    Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
+//Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
+
 });
 
 
-
-//Rutas para logros
-Route::get('/achievements', [AchievementController::class, 'index']);
-Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
-Route::post('/achievements', [AchievementController::class, 'store']);
-Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
-//Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
 
 
 

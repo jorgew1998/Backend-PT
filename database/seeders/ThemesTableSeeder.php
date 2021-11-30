@@ -26,6 +26,8 @@ class ThemesTableSeeder extends Seeder
         foreach ($users as $user) {
             // iniciamos sesión con cada uno
             JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+
+            //Crear temas ficticios
             $num_themes = 6;
             for ($i = 0; $i <$num_themes; $i++) {
                 Theme::create([
@@ -35,8 +37,6 @@ class ThemesTableSeeder extends Seeder
                 ]);
             }
         }
-
-        // Crear temas ficticios en la tabla
 
     }
 }

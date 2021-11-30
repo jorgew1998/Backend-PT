@@ -22,7 +22,7 @@ class CreateContentsTable extends Migration
             $table->foreignId('theme_id')
                 ->references('id')
                 ->on('themes')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
             $table->timestamps();
         });
     }

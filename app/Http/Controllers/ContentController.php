@@ -17,11 +17,26 @@ class ContentController extends Controller
     }
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'description' => 'required|string',
+            'question' => 'required|string',
+            'answer' => 'required|string',
+        ]);
+
+
         $content = Content::create($request->all());
         return response()->json($content, 201);
     }
     public function update(Request $request, Content $content)
     {
+
+        $validatedData = $request->validate([
+            'description' => 'string',
+            'question' => 'string',
+            'answer' => 'string',
+        ]);
+
         $content->update($request->all());
         return response()->json($content, 200);
     }

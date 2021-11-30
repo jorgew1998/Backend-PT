@@ -17,11 +17,27 @@ class ThemeController extends Controller
     }
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|unique:themes',
+            'difficulty' => 'required|string',
+            'advance' => 'required|string',
+        ]);
+
+
         $theme = Theme::create($request->all());
         return response()->json($theme, 201);
     }
     public function update(Request $request, Theme $theme)
     {
+
+        $validatedData = $request->validate([
+            'title' => 'string|unique:themes',
+            'difficulty' => 'string',
+            'advance' => 'string',
+        ]);
+
+
         $theme->update($request->all());
         return response()->json($theme, 200);
     }

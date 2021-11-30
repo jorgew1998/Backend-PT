@@ -17,11 +17,24 @@ class AchievementController extends Controller
     }
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|unique:achievements',
+            'description' => 'required|string',
+        ]);
+
+
         $achievement = Achievement::create($request->all());
         return response()->json($achievement, 201);
     }
     public function update(Request $request, Achievement $achievement)
     {
+
+        $validatedData = $request->validate([
+            'title' => 'string|unique:achievements',
+            'description' => 'string',
+        ]);
+
         $achievement->update($request->all());
         return response()->json($achievement, 200);
     }
