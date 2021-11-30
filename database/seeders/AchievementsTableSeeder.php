@@ -26,11 +26,13 @@ class AchievementsTableSeeder extends Seeder
         foreach ($users as $user) {
             // iniciamos sesión con cada uno
             JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+
+            //Datos ficticios
             $num_achievements = 3;
             for ($j = 0; $j < $num_achievements; $j++) {
                 Achievement::create([
                     'title' => $faker->sentence,
-                    'description' => $faker->paragraph,
+                    'description' => $faker->sentence,
                 ]);
             }
         }
