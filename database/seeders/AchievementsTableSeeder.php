@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Achievement;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AchievementsTableSeeder extends Seeder
 {
@@ -19,12 +21,19 @@ class AchievementsTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        //Crear contenidos ficitcios para la tabla
-        for ($i = 0; $i < 6; $i++) {
-            Achievement::create([
-                'title' => $faker->sentence,
-                'description' => $faker->paragraph,
-            ]);
+        //Obtenemos la lista de usuarios
+        $users = User::all();
+        foreach ($users as $user) {
+            // iniciamos sesión con cada uno
+            JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+            $num_achievements = 3;
+            for ($j = 0; $j < $num_achievements; $j++) {
+                Achievement::create([
+                    'title' => $faker->sentence,
+                    'description' => $faker->paragraph,
+                ]);
+            }
         }
+
     }
 }

@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Content;
+use App\Models\Theme;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ContentsTableSeeder extends Seeder
 {
@@ -19,13 +22,25 @@ class ContentsTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        //Crear contenidos ficitcios para la tabla
-        for ($i = 0; $i < 6; $i++) {
-        Content::create([
-            'description' => $faker->paragraph,
-            'question' => $faker->sentence,
-            'answer' => $faker->sentence,
-        ]);
-    }
+        //// Obtenemos todos los themas de la base de datps
+        $themes = Theme::all();
+
+        //Obtenemos la lista de usuarios
+       // $users = User::all();
+        //foreach ($users as $user) {
+            // iniciamos sesión con cada uno
+          //  JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+        //}
+
+
+        //Crear un contenido para cada tema
+        foreach ($themes as $theme) {
+            Content::create([
+                'description' => $faker->paragraph,
+                'question' => $faker->sentence,
+                'answer' => $faker->sentence,
+                'theme_id' => $theme->id,
+            ]);
+        }
     }
 }

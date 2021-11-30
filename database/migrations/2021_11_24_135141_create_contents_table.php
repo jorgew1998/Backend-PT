@@ -19,6 +19,10 @@ class CreateContentsTable extends Migration
             $table->string('question');
             $table->string('answer');
             $table->string('image')->nullable();
+            $table->foreignId('theme_id')
+                ->references('id')
+                ->on('themes')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
