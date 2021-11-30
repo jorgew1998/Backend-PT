@@ -53,4 +53,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function achievements()
+    {
+        return $this->hasMany('App\Models\Achievement');
+    }
+
+    public function themes()
+    {
+        return $this->hasMany('App\Models\Theme');
+    }
 }

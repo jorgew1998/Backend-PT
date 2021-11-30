@@ -18,6 +18,10 @@ class CreateAchievementsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('image')->nullable();
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
