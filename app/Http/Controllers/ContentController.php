@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
@@ -40,6 +41,11 @@ class ContentController extends Controller
         $content->update($request->all());
         return response()->json($content, 200);
     }
+
+    public function contents(Theme $theme) {
+        return response()->json($theme->contents, 201);
+    }
+
     public function delete(Content $content)
     {
         $content->delete();

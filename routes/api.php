@@ -51,6 +51,9 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('/contents/{content}', [ContentController::class, 'update']);
     Route::delete('/contents/{content}', [ContentController::class, 'delete']);
 
+    //Obtener los contenidos de un tema
+    Route::get('/themes/{theme}/contents', [ContentController::class, 'contents']);
+
     //Rutas para logros
     Route::get('/achievements', [AchievementController::class, 'index']);
     Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
