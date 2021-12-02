@@ -23,10 +23,15 @@ class ContentController extends Controller
             'description' => 'required|string',
             'question' => 'required|string',
             'answer' => 'required|string',
+            'image' => 'required|image|dimensions:min_width=200,min_height=200',
+            'theme_id'=> 'exists:themes,id',
         ]);
 
-
-        $content = Content::create($request->all());
+        $content = new Content($request->all());
+        $path = $request->image->store('public/contents');
+        $content->image = $path;
+        $content->save();
+        //$content = Content::create($request->all());
         return response()->json($content, 201);
     }
     public function update(Request $request, Content $content)
@@ -36,6 +41,8 @@ class ContentController extends Controller
             'description' => 'string',
             'question' => 'string',
             'answer' => 'string',
+            'image' => 'image|dimensions:min_width=200,min_height=200',
+            'theme_id'=> 'exists:themes,id',
         ]);
 
         $content->update($request->all());
