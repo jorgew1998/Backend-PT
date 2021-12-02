@@ -21,10 +21,14 @@ class AchievementController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|unique:achievements',
             'description' => 'required|string',
+            'image' => 'required|image|dimensions:min_width=200,min_height=200',
         ]);
 
-
-        $achievement = Achievement::create($request->all());
+        $achievement = new Achievement($request->all());
+        $path = $request->image->store('public/achievements');
+        $achievement->image = $path;
+        $achievement->save();
+        //$achievement = Achievement::create($request->all());
         return response()->json($achievement, 201);
     }
     public function update(Request $request, Achievement $achievement)
@@ -33,6 +37,7 @@ class AchievementController extends Controller
         $validatedData = $request->validate([
             'title' => 'string|unique:achievements',
             'description' => 'string',
+            'image' => 'image|dimensions:min_width=200,min_height=200',
         ]);
 
         $achievement->update($request->all());

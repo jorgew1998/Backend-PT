@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Content extends Model
 {
-    protected $fillable = ['description', 'question','answer','theme_id'];
+    protected $fillable = ['description', 'question','answer','theme_id','image'];
 
 
     public function theme()

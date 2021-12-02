@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Achievement extends Model
 {
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description','image'];
 
     public static function boot()
     {
