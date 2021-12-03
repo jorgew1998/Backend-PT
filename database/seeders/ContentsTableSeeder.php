@@ -30,7 +30,11 @@ class ContentsTableSeeder extends Seeder
             Content::create([
                 'description' => $faker->sentence,
                 'question' => $faker->sentence,
-                'answer' => $faker->sentence,
+                'answer_1' => $faker->sentence,
+                'answer_2' => $faker->sentence,
+                'answer_3' => $faker->sentence,
+                'answer_4' => $faker->sentence,
+                'feedback' => $faker->sentence,
                 'theme_id' => $theme->id,
             ]);
         }

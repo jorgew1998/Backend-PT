@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('experience')->nullable();
             $table->integer('progress')->nullable();
+            $table->string('rank')->nullable();
+            $table->integer('level')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

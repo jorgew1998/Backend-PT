@@ -35,6 +35,8 @@ class UsersTableSeeder extends Seeder
                 'password' => $password,
                 'experience' => $faker->numerify('####'),
                 'progress'=> $faker->numerify('###'),
+                'rank' => $faker->word,
+                'level' => $faker->numerify('##')
             ]);
         }
 
