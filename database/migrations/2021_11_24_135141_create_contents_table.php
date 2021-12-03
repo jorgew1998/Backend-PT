@@ -17,7 +17,11 @@ class CreateContentsTable extends Migration
             $table->id();
             $table->string('description');
             $table->string('question');
-            $table->string('answer');
+            $table->string('answer_1');
+            $table->string('answer_2');
+            $table->string('answer_3');
+            $table->string('answer_4');
+            $table->string('feedback');
             $table->string('image')->nullable();
             $table->foreignId('theme_id')
                 ->references('id')

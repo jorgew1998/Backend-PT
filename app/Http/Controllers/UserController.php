@@ -65,13 +65,20 @@ class UserController extends Controller
     {
         return $user;
     }
-    public function store(Request $request)
-    {
-        $user = User::create($request->all());
-        return response()->json($user, 201);
-    }
+    //public function store(Request $request)
+    //{
+        //$user = User::create($request->all());
+      //  return response()->json($user, 201);
+    //}
     public function update(Request $request, User $user)
     {
+        $validatedData = $request->validate([
+            'experience' => 'numeric',
+            'progress' => 'numeric',
+            'rank' => 'string',
+            'level' => 'numeric',
+        ]);
+
         $user->update($request->all());
         return response()->json($user, 200);
     }

@@ -22,7 +22,11 @@ class ContentController extends Controller
         $validatedData = $request->validate([
             'description' => 'required|string',
             'question' => 'required|string',
-            'answer' => 'required|string',
+            'answer_1' => 'required|string',
+            'answer_2' => 'required|string',
+            'answer_3' => 'required|string',
+            'answer_4' => 'required|string',
+            'feedback' => 'required|string',
             'image' => 'required|image|dimensions:min_width=200,min_height=200',
             'theme_id'=> 'exists:themes,id',
         ]);
@@ -40,7 +44,11 @@ class ContentController extends Controller
         $validatedData = $request->validate([
             'description' => 'string',
             'question' => 'string',
-            'answer' => 'string',
+            'answer_1' => 'string',
+            'answer_2' => 'string',
+            'answer_3' => 'string',
+            'answer_4' => 'string',
+            'feedback' => 'string',
             'image' => 'image|dimensions:min_width=200,min_height=200',
             'theme_id'=> 'exists:themes,id',
         ]);
