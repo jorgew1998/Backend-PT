@@ -48,7 +48,7 @@ class ThemePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
@@ -60,7 +60,7 @@ class ThemePolicy
      */
     public function update(User $user, Theme $theme)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN) && $user->id === $theme->user_id;
     }
 
     /**
@@ -72,7 +72,7 @@ class ThemePolicy
      */
     public function delete(User $user, Theme $theme)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
