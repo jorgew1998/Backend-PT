@@ -29,6 +29,7 @@ class ThemeController extends Controller
     }
     public function store(Request $request)
     {
+        $this->authorize('create', Theme::class);
         $validatedData = $request->validate([
             'title' => 'required|string|unique:themes',
             'difficulty' => 'required|string',
@@ -41,7 +42,7 @@ class ThemeController extends Controller
     }
     public function update(Request $request, Theme $theme)
     {
-
+        $this->authorize('update', $theme);
         $validatedData = $request->validate([
             'title' => 'string|unique:themes',
             'difficulty' => 'string',
@@ -54,7 +55,7 @@ class ThemeController extends Controller
     }
     public function delete(Theme $theme)
     {
-
+        $this->authorize('delete', $theme);
         $theme->delete();
         return response()->json(null, 204);
     }

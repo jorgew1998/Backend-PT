@@ -28,6 +28,8 @@ class AchievementController extends Controller
     }
     public function store(Request $request)
     {
+        $this->authorize('create', Achievement::class);
+
         $validatedData = $request->validate([
             'title' => 'required|string|unique:achievements',
             'description' => 'required|string',
@@ -43,6 +45,7 @@ class AchievementController extends Controller
     }
     public function update(Request $request, Achievement $achievement)
     {
+        $this->authorize('update', $achievement);
         $validatedData = $request->validate([
             'title' => 'string|unique:achievements',
             'description' => 'string',
@@ -54,6 +57,7 @@ class AchievementController extends Controller
     }
     public function delete(Achievement $achievement)
     {
+        $this->authorize('delete', $achievement);
         $achievement->delete();
         return response()->json(null, 204);
     }

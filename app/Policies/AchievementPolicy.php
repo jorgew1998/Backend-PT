@@ -48,7 +48,7 @@ class AchievementPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
@@ -60,7 +60,7 @@ class AchievementPolicy
      */
     public function update(User $user, Achievement $achievement)
     {
-        //
+            return $user->isGranted(User::ROLE_SUPERADMIN) && $user->id === $achievement->user_id;
     }
 
     /**
@@ -72,7 +72,7 @@ class AchievementPolicy
      */
     public function delete(User $user, Achievement $achievement)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**

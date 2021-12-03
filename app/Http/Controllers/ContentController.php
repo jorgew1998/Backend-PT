@@ -20,7 +20,7 @@ class ContentController extends Controller
     }
     public function store(Request $request)
     {
-
+        $this->authorize('create', Content::class);
         $validatedData = $request->validate([
             'description' => 'required|string',
             'question' => 'required|string',
@@ -42,7 +42,7 @@ class ContentController extends Controller
     }
     public function update(Request $request, Content $content)
     {
-
+        $this->authorize('update', $content);
         $validatedData = $request->validate([
             'description' => 'string',
             'question' => 'string',
@@ -65,6 +65,7 @@ class ContentController extends Controller
 
     public function delete(Content $content)
     {
+        $this->authorize('delete', $content);
         $content->delete();
         return response()->json(null, 204);
     }

@@ -49,7 +49,7 @@ class ContentPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
@@ -61,7 +61,7 @@ class ContentPolicy
      */
     public function update(User $user, Content $content)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
@@ -73,7 +73,7 @@ class ContentPolicy
      */
     public function delete(User $user, Content $content)
     {
-        //
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
