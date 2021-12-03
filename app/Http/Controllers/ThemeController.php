@@ -9,7 +9,17 @@ class ThemeController extends Controller
 {
     public function index()
     {
-        return Theme::all();
+
+        $themeList = Theme::all();
+        $themes = [];
+
+        foreach ($themeList as $theme) {
+            if($theme->user_id === auth()->user()->id){
+                $themes[] = $theme;
+            }
+        }
+        return response()-> json($themes, 200);
+        //return Theme::all();
     }
     public function show(Theme $theme)
     {
