@@ -23,6 +23,7 @@ class ThemeController extends Controller
     }
     public function show(Theme $theme)
     {
+        $this->authorize('view', $theme);
         return $theme;
     }
     public function store(Request $request)
