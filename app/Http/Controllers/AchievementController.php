@@ -9,7 +9,16 @@ class AchievementController extends Controller
 {
     public function index()
     {
-        return Achievement::all();
+        $achievementsList = Achievement::all();
+        $achievements = [];
+
+        foreach ($achievementsList as $achievement) {
+            if($achievement->user_id === auth()->user()->id){
+                $achievements[] = $achievement;
+            }
+        }
+       // return Achievement::all();
+        return response()-> json($achievements, 200);
     }
     public function show(Achievement $achievement)
     {
@@ -17,7 +26,6 @@ class AchievementController extends Controller
     }
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'title' => 'required|string|unique:achievements',
             'description' => 'required|string',
@@ -33,7 +41,6 @@ class AchievementController extends Controller
     }
     public function update(Request $request, Achievement $achievement)
     {
-
         $validatedData = $request->validate([
             'title' => 'string|unique:achievements',
             'description' => 'string',
