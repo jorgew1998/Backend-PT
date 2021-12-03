@@ -22,6 +22,7 @@ class AchievementController extends Controller
     }
     public function show(Achievement $achievement)
     {
+        $this->authorize('view', $achievement);
         return $achievement;
     }
     public function store(Request $request)
