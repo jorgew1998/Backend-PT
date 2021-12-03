@@ -9,6 +9,7 @@ class AchievementController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Achievement::class);
         $achievementsList = Achievement::all();
         $achievements = [];
 

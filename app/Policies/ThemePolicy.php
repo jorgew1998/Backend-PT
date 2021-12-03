@@ -10,6 +10,13 @@ class ThemePolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability)
+    {
+        if ($user->isGranted(User::ROLE_SUPERADMIN)) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -18,7 +25,7 @@ class ThemePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->isGranted(User::ROLE_USER);
     }
 
     /**
@@ -30,7 +37,7 @@ class ThemePolicy
      */
     public function view(User $user, Theme $theme)
     {
-        return $user->id === $theme->user_id;
+        return $user->isGranted(User::ROLE_USER) && $user->id === $theme->user_id;
     }
 
     /**
