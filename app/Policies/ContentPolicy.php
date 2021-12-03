@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Achievement;
+use App\Models\Content;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AchievementPolicy
+class ContentPolicy
 {
     use HandlesAuthorization;
 
@@ -32,13 +32,14 @@ class AchievementPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Achievement  $achievement
+     * @param  \App\Models\Content  $content
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Achievement $achievement)
+    public function view(User $user, Content $content)
     {
-        return $user->isGranted(User::ROLE_USER) &&  $user->id === $achievement->user_id;
+        return $user->isGranted(User::ROLE_USER);
     }
+
 
     /**
      * Determine whether the user can create models.
@@ -55,10 +56,10 @@ class AchievementPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Achievement  $achievement
+     * @param  \App\Models\Content  $content
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Achievement $achievement)
+    public function update(User $user, Content $content)
     {
         //
     }
@@ -67,10 +68,10 @@ class AchievementPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Achievement  $achievement
+     * @param  \App\Models\Content  $content
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Achievement $achievement)
+    public function delete(User $user, Content $content)
     {
         //
     }
@@ -79,10 +80,10 @@ class AchievementPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Achievement  $achievement
+     * @param  \App\Models\Content  $content
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Achievement $achievement)
+    public function restore(User $user, Content $content)
     {
         //
     }
@@ -91,10 +92,10 @@ class AchievementPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Achievement  $achievement
+     * @param  \App\Models\Content  $content
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Achievement $achievement)
+    public function forceDelete(User $user, Content $content)
     {
         //
     }

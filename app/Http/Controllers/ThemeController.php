@@ -9,6 +9,7 @@ class ThemeController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Theme::class);
 
         $themeList = Theme::all();
         $themes = [];
@@ -28,7 +29,6 @@ class ThemeController extends Controller
     }
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'title' => 'required|string|unique:themes',
             'difficulty' => 'required|string',
@@ -54,6 +54,7 @@ class ThemeController extends Controller
     }
     public function delete(Theme $theme)
     {
+
         $theme->delete();
         return response()->json(null, 204);
     }

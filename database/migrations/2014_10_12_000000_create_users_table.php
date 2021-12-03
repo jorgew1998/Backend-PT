@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('progress')->nullable();
             $table->string('rank')->nullable();
             $table->integer('level')->nullable();
+            $table->string('role')->default(\App\Models\User::ROLE_USER);
             $table->rememberToken();
             $table->timestamps();
         });
