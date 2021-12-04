@@ -48,7 +48,7 @@ class ThemePolicy
      */
     public function create(User $user)
     {
-        return $user->isGranted(User::ROLE_SUPERADMIN);
+        return $user->isGranted(User::ROLE_USER);
     }
 
     /**
