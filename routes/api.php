@@ -31,9 +31,11 @@ Route::post('login', [UserController::class, 'authenticate']);
 Route::group(['middleware' => ['jwt.verify']], function() {
 
     //Rutas para usuarios
+    Route::get('user', [UserController::class, 'getAuthenticatedUser']);
+    Route::post('logout', [UserController::class, 'logout']);
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{user}', [UserController::class, 'show']);
-    Route::post('/users', [UserController::class, 'store']);
+    //Route::post('/users', [UserController::class, 'store']);
     Route::put('/users/{user}', [UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'delete']);
 
