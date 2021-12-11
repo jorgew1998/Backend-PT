@@ -112,10 +112,22 @@ class UserController extends Controller
 
     public function index()
     {
-        return User::all();
+
+        $this->authorize('viewAny', User::class);
+        $usersList = User::all();
+        $users = [];
+
+        foreach ($usersList as $user) {
+            if($user->id === auth()->user()->id){
+                $users[] = $user;
+            }
+        }
+
+        return response()-> json($users, 200);
     }
     public function show(User $user)
     {
+        $this->authorize('view', $user);
         return $user;
     }
     //public function store(Request $request)
@@ -125,6 +137,8 @@ class UserController extends Controller
     //}
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $validatedData = $request->validate([
             'experience' => 'numeric',
             'progress' => 'numeric',
@@ -139,5 +153,10 @@ class UserController extends Controller
     {
         $user->delete();
         return response()->json(null, 204);
+    }
+
+    public function allUsers() {
+        $this->authorize('all', User::class);
+        return User::all();
     }
 }
