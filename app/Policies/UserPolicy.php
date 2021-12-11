@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Theme;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ThemePolicy
+class UserPolicy
 {
     use HandlesAuthorization;
 
@@ -29,15 +28,26 @@ class ThemePolicy
     }
 
     /**
+     * Determine whether the user can view any models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function all(User $user)
+    {
+        return $user->isGranted(User::ROLE_SUPERADMIN);
+    }
+
+    /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Theme  $theme
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Theme $theme)
+    public function view(User $user, User $model)
     {
-        return $user->isGranted(User::ROLE_USER) && $user->id === $theme->user_id;
+        return $user->isGranted(User::ROLE_USER) &&  $user->id === $model->id;
     }
 
     /**
@@ -48,41 +58,41 @@ class ThemePolicy
      */
     public function create(User $user)
     {
-        return $user->isGranted(User::ROLE_USER);
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Theme  $theme
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Theme $theme)
+    public function update(User $user, User $model)
     {
-        return $user->isGranted(User::ROLE_USER) && $user->id === $theme->user_id;
+        return $user->isGranted(User::ROLE_USER) && $user->id === $model->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Theme  $theme
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Theme $theme)
+    public function delete(User $user, User $model)
     {
-        return $user->isGranted(User::ROLE_SUPERADMIN);
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Theme  $theme
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Theme $theme)
+    public function restore(User $user, User $model)
     {
         //
     }
@@ -91,10 +101,10 @@ class ThemePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Theme  $theme
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Theme $theme)
+    public function forceDelete(User $user, User $model)
     {
         //
     }
