@@ -46,6 +46,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/themes', [ThemeController::class, 'store']);
     Route::put('/themes/{theme}', [ThemeController::class, 'update']);
     Route::delete('/themes/{theme}', [ThemeController::class, 'delete']);
+    Route::post('/firstThemes', [ThemeController::class, 'initialThemes']);
+
 
     //Rutas para contenidos
     Route::get('/contents', [ContentController::class, 'index']);
@@ -53,6 +55,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/contents', [ContentController::class, 'store']);
     Route::put('/contents/{content}', [ContentController::class, 'update']);
     Route::delete('/contents/{content}', [ContentController::class, 'delete']);
+    Route::post('/firstContents', [ContentController::class, 'initialContents']);
 
     //Obtener los contenidos de un tema
     Route::get('/themes/{theme}/contents', [ContentController::class, 'contents']);
@@ -62,7 +65,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
     Route::post('/achievements', [AchievementController::class, 'store']);
     Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
-//Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
+   //Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
+    Route::post('/firstAchievements', [AchievementController::class, 'initialAchievements']);
 
 });
 

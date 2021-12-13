@@ -69,4 +69,48 @@ class ContentController extends Controller
         $content->delete();
         return response()->json(null, 204);
     }
+
+    public function initialContents(Request $request) {
+
+        $this->authorize('create', Content::class);
+        $validatedData = $request->validate([
+            'description' => 'string',
+            'question' => 'string',
+            'answer_1' => 'string',
+            'answer_2' => 'string',
+            'answer_3' => 'string',
+            'answer_4' => 'string',
+            'feedback' => 'string',
+            'image' => 'image|dimensions:min_width=200,min_height=200',
+            'theme_id'=> 'exists:themes,id',
+        ]);
+
+        $contents = $request['data'];
+
+        foreach ($contents  as $key => $value) {
+
+            $description = $contents[$key]["description"];
+            $question = $contents[$key]["question"];
+            $answer1= $contents[$key]["answer_1"];
+            $answer2= $contents[$key]["answer_2"];
+            $answer3= $contents[$key]["answer_3"];
+            $answer4= $contents[$key]["answer_4"];
+            $feedback= $contents[$key]["feedback"];
+            $themeID= $contents[$key]["theme_id"];
+            $image= $contents[$key]["feedback"];
+
+            Content::create([
+                'description' => $description,
+                'question' => $question,
+                'answer_1' => $answer1,
+                'answer_2' => $answer2,
+                'answer_3' => $answer3,
+                'answer_4' => $answer4,
+                'feedback' => $feedback,
+                'theme_id' => $themeID,
+                'image' => $image,
+            ]);
+        }
+        return response()->json($request,201);
+    }
 }
