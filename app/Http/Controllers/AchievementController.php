@@ -31,7 +31,7 @@ class AchievementController extends Controller
         $this->authorize('create', Achievement::class);
 
         $validatedData = $request->validate([
-            'title' => 'required|string|unique:achievements',
+            'title' => 'required|string',
             'description' => 'required|string',
             'image' => 'required|image|dimensions:min_width=200,min_height=200',
         ]);
@@ -60,5 +60,33 @@ class AchievementController extends Controller
         $this->authorize('delete', $achievement);
         $achievement->delete();
         return response()->json(null, 204);
+    }
+
+    public function initialAchievements (Request $request) {
+
+        $this->authorize('create', Achievement::class);
+
+        $validatedData = $request->validate([
+            'title' => 'string',
+            'description' => 'string',
+            'image' => 'image|dimensions:min_width=200,min_height=200',
+        ]);
+
+        $achievements = $request["data"];
+
+        foreach ($achievements as $key => $value) {
+
+            $title = $achievements[$key]["title"];
+            $description = $achievements[$key]["description"];
+            $image = $achievements[$key]["image"];
+
+
+            Achievement::create([
+                'title' => $title,
+                'description' => $description,
+                'image' => $image,
+            ]);
+        }
+        return response()->json($request,201);
     }
 }

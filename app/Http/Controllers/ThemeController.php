@@ -31,7 +31,7 @@ class ThemeController extends Controller
     {
         $this->authorize('create', Theme::class);
         $validatedData = $request->validate([
-            'title' => 'required|string|unique:themes',
+            'title' => 'required|string',
             'difficulty' => 'required|string',
             'advance' => 'required|string',
         ]);
@@ -58,5 +58,33 @@ class ThemeController extends Controller
         $this->authorize('delete', $theme);
         $theme->delete();
         return response()->json(null, 204);
+    }
+
+    public function initialThemes (Request $request) {
+
+        $this->authorize('create', Theme::class);
+        $validatedData = $request->validate([
+            'title' => 'string',
+            'difficulty' => 'string',
+            'advance' => 'string',
+        ]);
+
+
+        //$List = json_decode($request, true);
+        $themes = $request['data'];
+
+        foreach ($themes  as $key => $value) {
+            $title = $themes[$key]["title"];
+            $difficulty = $themes[$key]["difficulty"];
+            $advance = $themes[$key]["advance"];
+
+           Theme::create([
+                'title' => $title,
+                'difficulty' => $difficulty,
+                'advance' => $advance,
+        ]);
+        }
+        return response()->json($request,201);
+
     }
 }
