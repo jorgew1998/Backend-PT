@@ -47,6 +47,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::put('/themes/{theme}', [ThemeController::class, 'update']);
     Route::delete('/themes/{theme}', [ThemeController::class, 'delete']);
     Route::post('/firstThemes', [ThemeController::class, 'initialThemes']);
+    Route::get('/themesId',[ThemeController::class, 'themesId'] );
 
 
     //Rutas para contenidos
