@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Theme;
+use App\Http\Resources\Theme as ThemeResource;
 use Illuminate\Http\Request;
 
 class ThemeController extends Controller
@@ -86,5 +87,18 @@ class ThemeController extends Controller
         }
         return response()->json($request,201);
 
+    }
+
+    public function themesId() {
+
+        $themeList = Theme::all();
+        $themes = [];
+
+        foreach ($themeList as $theme) {
+            if($theme->user_id === auth()->user()->id){
+                $themes[] = $theme;
+            }
+        }
+        return response()->json(ThemeResource::collection($themes));
     }
 }
