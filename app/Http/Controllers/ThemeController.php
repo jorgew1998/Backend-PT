@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Theme;
 use App\Http\Resources\Theme as ThemeResource;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ThemeController extends Controller
 {
@@ -31,15 +33,40 @@ class ThemeController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', Theme::class);
+
         $validatedData = $request->validate([
-            'title' => 'required|string',
-            'difficulty' => 'required|string',
-            'advance' => 'required|string',
+            'title' => 'string',
+            'difficulty' => 'string',
+            'advance' => 'string',
         ]);
 
 
-        $theme = Theme::create($request->all());
-        return response()->json($theme, 201);
+        //$theme = Theme::create($request->all());
+        //return response()->json($theme, 201);
+
+
+        $users = User::all();
+        $themes = $request['data'];
+
+        foreach ($users as $user) {
+            // iniciamos sesión con este usuario
+            JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+            // Y ahora con este usuario creamos algunos articulo
+            foreach ($themes  as $key => $value) {
+                $title = $themes[$key]["title"];
+                $difficulty = $themes[$key]["difficulty"];
+                $advance = $themes[$key]["advance"];
+
+                Theme::create([
+                    'title' => $title,
+                    'difficulty' => $difficulty,
+                    'advance' => $advance,
+                ]);
+            }
+        }
+
+        return response()->json($request,201);
+
     }
     public function update(Request $request, Theme $theme)
     {
