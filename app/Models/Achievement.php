@@ -10,16 +10,16 @@ class Achievement extends Model
 {
     protected $fillable = ['title', 'description','image'];
 
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($achievement) {
-            $achievement->user_id = Auth::id();
-        });
-    }
+   // public static function boot()
+    //{
+      //  parent::boot();
+       // static::creating(function ($achievement) {
+         //   $achievement->user_id = Auth::id();
+        //});
+    //}
 
-    public function user()
+    public function achievemnts()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->hasMany('App\Models\AchievementDetail');
     }
 }

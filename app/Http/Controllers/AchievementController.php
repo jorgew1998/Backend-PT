@@ -10,16 +10,16 @@ class AchievementController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Achievement::class);
-        $achievementsList = Achievement::all();
-        $achievements = [];
+      //  $achievementsList = Achievement::all();
+       // $achievements = [];
 
-        foreach ($achievementsList as $achievement) {
-            if($achievement->user_id === auth()->user()->id){
-                $achievements[] = $achievement;
-            }
-        }
-       // return Achievement::all();
-        return response()-> json($achievements, 200);
+       // foreach ($achievementsList as $achievement) {
+        //    if($achievement->user_id === auth()->user()->id){
+         //       $achievements[] = $achievement;
+         //   }
+      //  }
+        return Achievement::all();
+      //  return response()-> json($achievements, 200);
     }
     public function show(Achievement $achievement)
     {
@@ -31,7 +31,7 @@ class AchievementController extends Controller
         $this->authorize('create', Achievement::class);
 
         $validatedData = $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|unique:achievements',
             'description' => 'required|string',
             'image' => 'required|image|dimensions:min_width=200,min_height=200',
         ]);

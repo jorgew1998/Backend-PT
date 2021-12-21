@@ -71,12 +71,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function achievements()
     {
-        return $this->hasMany('App\Models\Achievement');
+        return $this->hasMany('App\Models\AchievementDetail');
     }
 
-    public function themes()
+    public function contents()
     {
-        return $this->hasMany('App\Models\Theme');
+        return $this->hasMany('App\Models\ContentDetail');
     }
 
     public function isGranted($role)

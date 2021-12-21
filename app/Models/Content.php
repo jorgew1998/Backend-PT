@@ -15,4 +15,15 @@ class Content extends Model
     {
         return $this->belongsTo('App\Models\Theme');
     }
+
+    public function contents()
+    {
+        return $this->hasMany('App\Models\AchievementDetail');
+    }
+
+    public function details()
+    {
+        return $this->hasMany('App\Models\ContentDetail');
+    }
+
 }

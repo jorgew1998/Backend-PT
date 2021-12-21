@@ -14,16 +14,16 @@ class ThemeController extends Controller
     {
         $this->authorize('viewAny', Theme::class);
 
-        $themeList = Theme::all();
-        $themes = [];
+       // $themeList = Theme::all();
+        //$themes = [];
 
-        foreach ($themeList as $theme) {
-            if($theme->user_id === auth()->user()->id){
-                $themes[] = $theme;
-            }
-        }
-        return response()-> json($themes, 200);
-        //return Theme::all();
+        //foreach ($themeList as $theme) {
+            //if($theme->user_id === auth()->user()->id){
+            //    $themes[] = $theme;
+          //  }
+        //}
+       // return response()-> json($themes, 200);
+        return Theme::all();
     }
     public function show(Theme $theme)
     {
@@ -35,9 +35,9 @@ class ThemeController extends Controller
         $this->authorize('create', Theme::class);
 
         $validatedData = $request->validate([
-            'title' => 'string',
-            'difficulty' => 'string',
-            'advance' => 'string',
+            'title' => 'required|string|unique:themes',
+            'difficulty' => 'required|string',
+            'advance' => 'required|string',
         ]);
 
 
@@ -45,27 +45,28 @@ class ThemeController extends Controller
         //return response()->json($theme, 201);
 
 
-        $users = User::all();
-        $themes = $request['data'];
+        //$users = User::all();
+       // $themes = $request['data'];
 
-        foreach ($users as $user) {
+       // foreach ($users as $user) {
             // iniciamos sesión con este usuario
-            JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+          //  JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
             // Y ahora con este usuario creamos algunos articulo
-            foreach ($themes  as $key => $value) {
-                $title = $themes[$key]["title"];
-                $difficulty = $themes[$key]["difficulty"];
-                $advance = $themes[$key]["advance"];
+           // foreach ($themes  as $key => $value) {
+             //   $title = $themes[$key]["title"];
+             //   $difficulty = $themes[$key]["difficulty"];
+             //   $advance = $themes[$key]["advance"];
+//
+              //  Theme::create([
+              //      'title' => $title,
+              //      'difficulty' => $difficulty,
+              //      'advance' => $advance,
+              //  ]);
+           // }
+        $achievement = Theme::create($request->all());
+        //}
 
-                Theme::create([
-                    'title' => $title,
-                    'difficulty' => $difficulty,
-                    'advance' => $advance,
-                ]);
-            }
-        }
-
-        return response()->json($request,201);
+        return response()->json($achievement,201);
 
     }
     public function update(Request $request, Theme $theme)

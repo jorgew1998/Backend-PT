@@ -14,15 +14,11 @@ class CreateThemesTable extends Migration
     public function up()
     {
         Schema::create('themes', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('difficulty');
             $table->string('advance');
             $table->timestamps();
-            $table->foreignId('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('restrict');
         });
     }
 

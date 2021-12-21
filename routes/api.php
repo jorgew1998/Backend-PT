@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\AchievementDetailController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ContentDetailController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -56,7 +58,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/contents', [ContentController::class, 'store']);
     Route::put('/contents/{content}', [ContentController::class, 'update']);
     Route::delete('/contents/{content}', [ContentController::class, 'delete']);
-    Route::post('/firstContents', [ContentController::class, 'initialContents']);
+    //Route::post('/firstContents', [ContentController::class, 'initialContents']);
 
     //Obtener los contenidos de un tema
     Route::get('/themes/{theme}/contents', [ContentController::class, 'contents']);
@@ -66,9 +68,22 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
     Route::post('/achievements', [AchievementController::class, 'store']);
     Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
-   //Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
-    Route::post('/firstAchievements', [AchievementController::class, 'initialAchievements']);
+    //Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);
+    //Route::post('/firstAchievements', [AchievementController::class, 'initialAchievements']);
 
+    //rutas para detalle de logros
+    Route::get('/achievementsDetails', [AchievementDetailController::class, 'index']);
+    Route::get('/achievementsDetails/{achievement}', [AchievementDetailController::class, 'show']);
+    Route::post('/achievementsDetails', [AchievementDetailController::class, 'store']);
+    Route::put('/achievementsDetails/{achievement}', [AchievementDetailController::class, 'update']);
+    Route::delete('/achievementsDetails/{achievement}', [AchievementController::class, 'delete']);
+
+    //rutas para detalle de contenidos
+    Route::get('/contentsDetails', [ContentDetailController::class, 'index']);
+    Route::get('/contentsDetails/{content}', [ContentDetailController::class, 'show']);
+    Route::post('/contentsDetails', [ContentDetailController::class, 'store']);
+    Route::put('/contentsDetails/{content}', [ContentDetailController::class, 'update']);
+    Route::delete('/achievements/{content}', [ContentDetailController::class, 'delete']);
 });
 
 

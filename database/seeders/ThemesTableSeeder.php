@@ -22,10 +22,10 @@ class ThemesTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         //Obtenemos la lista de usuarios
-        $users = User::all();
-        foreach ($users as $user) {
+       // $users = User::all();
+        //foreach ($users as $user) {
             // iniciamos sesión con cada uno
-            JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
+          //  JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
 
             //Crear temas ficticios
             $num_themes = 6;
@@ -38,5 +38,5 @@ class ThemesTableSeeder extends Seeder
             }
         }
 
-    }
+    //}
 }

@@ -30,7 +30,7 @@ class ContentController extends Controller
             'answer_4' => 'required|string',
             'feedback' => 'required|string',
             'image' => 'required|image|dimensions:min_width=200,min_height=200',
-            'theme_id'=> 'exists:themes,id',
+            'theme_id'=> 'required|exists:themes,id',
         ]);
 
         $content = new Content($request->all());

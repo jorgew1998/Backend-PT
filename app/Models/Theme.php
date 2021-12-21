@@ -10,22 +10,28 @@ class Theme extends Model
 {
     protected $fillable = ['title', 'difficulty','advance'];
 
-    public static function boot()
-    {
-        parent::boot();
-        static::creating(function ($theme) {
-            $theme->user_id = Auth::id();
-        });
-    }
+    //public static function boot()
+    //{
+      //  parent::boot();
+        //static::creating(function ($theme) {
+          //  $theme->user_id = Auth::id();
+        //});
+    //}
 
     public function contents()
     {
         return $this->hasMany('App\Models\Content');
     }
 
-    public function user()
+    public function themes()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->hasMany('App\Models\AchievementDetail');
     }
+
+    public function details()
+    {
+        return $this->hasMany('App\Models\ContentDetail');
+    }
+
 }
 
