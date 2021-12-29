@@ -46,7 +46,7 @@ class ContentDetailController extends Controller
     {
         $this->authorize('update', $content);
         $validatedData = $request->validate([
-            'achievement_id' => 'required|exists:achievements,id',
+            'content_id' => 'exists:contents,id',
             'user_id' => 'exists:users,id',
             'theme_id' => 'exists:themes,id',
             'date' => 'date',

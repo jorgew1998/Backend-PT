@@ -29,6 +29,18 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
 
+//Rutas publicas de temas
+Route::get('/themes', [ThemeController::class, 'index']);
+Route::get('/themes/{theme}', [ThemeController::class, 'show']);
+
+//Rutas publicas de contenidos
+Route::get('/contents', [ContentController::class, 'index']);
+Route::get('/contents/{content}', [ContentController::class, 'show']);
+
+//Rutas publicas de logros
+Route::get('/achievements', [AchievementController::class, 'index']);
+Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
+
 
 Route::group(['middleware' => ['jwt.verify']], function() {
 
@@ -43,8 +55,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::delete('/users/{user}', [UserController::class, 'delete']);
 
     //Rutas para los temas
-    Route::get('/themes', [ThemeController::class, 'index']);
-    Route::get('/themes/{theme}', [ThemeController::class, 'show']);
+    //Route::get('/themes', [ThemeController::class, 'index']);
+    //Route::get('/themes/{theme}', [ThemeController::class, 'show']);
     Route::post('/themes', [ThemeController::class, 'store']);
     Route::put('/themes/{theme}', [ThemeController::class, 'update']);
     Route::delete('/themes/{theme}', [ThemeController::class, 'delete']);
@@ -53,8 +65,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
 
     //Rutas para contenidos
-    Route::get('/contents', [ContentController::class, 'index']);
-    Route::get('/contents/{content}', [ContentController::class, 'show']);
+    //Route::get('/contents', [ContentController::class, 'index']);
+    //Route::get('/contents/{content}', [ContentController::class, 'show']);
     Route::post('/contents', [ContentController::class, 'store']);
     Route::put('/contents/{content}', [ContentController::class, 'update']);
     Route::delete('/contents/{content}', [ContentController::class, 'delete']);
@@ -64,8 +76,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('/themes/{theme}/contents', [ContentController::class, 'contents']);
 
     //Rutas para logros
-    Route::get('/achievements', [AchievementController::class, 'index']);
-    Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
+    //Route::get('/achievements', [AchievementController::class, 'index']);
+    //Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
     Route::post('/achievements', [AchievementController::class, 'store']);
     Route::put('/achievements/{achievement}', [AchievementController::class, 'update']);
     //Route::delete('/achievements/{achievement}', [AchievementController::class, 'delete']);

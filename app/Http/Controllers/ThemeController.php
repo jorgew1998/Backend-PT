@@ -12,7 +12,7 @@ class ThemeController extends Controller
 {
     public function index()
     {
-        $this->authorize('viewAny', Theme::class);
+      //  $this->authorize('viewAny', Theme::class);
 
        // $themeList = Theme::all();
         //$themes = [];
@@ -27,7 +27,7 @@ class ThemeController extends Controller
     }
     public function show(Theme $theme)
     {
-        $this->authorize('view', $theme);
+        //$this->authorize('view', $theme);
         return $theme;
     }
     public function store(Request $request)

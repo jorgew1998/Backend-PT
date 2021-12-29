@@ -25,7 +25,7 @@ class AchievementPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isGranted(User::ROLE_USER);
+      //return $user->isGranted(User::ROLE_USER);
     }
 
     /**
@@ -37,7 +37,7 @@ class AchievementPolicy
      */
     public function view(User $user, Achievement $achievement)
     {
-        return $user->isGranted(User::ROLE_USER);
+        //return $user->isGranted(User::ROLE_USER);
     }
 
     /**

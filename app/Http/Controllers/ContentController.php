@@ -10,12 +10,12 @@ class ContentController extends Controller
 {
     public function index()
     {
-        $this->authorize('viewAny', Content::class);
+      //  $this->authorize('viewAny', Content::class);
         return Content::all();
     }
     public function show(Content $content)
     {
-        $this->authorize('view', $content);
+       // $this->authorize('view', $content);
         return $content;
     }
     public function store(Request $request)

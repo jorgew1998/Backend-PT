@@ -25,7 +25,7 @@ class ThemePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isGranted(User::ROLE_USER);
+        //return $user->isGranted(User::ROLE_USER);
     }
 
     /**
@@ -37,7 +37,7 @@ class ThemePolicy
      */
     public function view(User $user, Theme $theme)
     {
-        return $user->isGranted(User::ROLE_USER);
+        //return $user->isGranted(User::ROLE_USER);
     }
 
     /**

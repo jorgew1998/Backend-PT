@@ -9,7 +9,7 @@ class AchievementController extends Controller
 {
     public function index()
     {
-        $this->authorize('viewAny', Achievement::class);
+        //$this->authorize('viewAny', Achievement::class);
       //  $achievementsList = Achievement::all();
        // $achievements = [];
 
@@ -23,7 +23,7 @@ class AchievementController extends Controller
     }
     public function show(Achievement $achievement)
     {
-        $this->authorize('view', $achievement);
+        //$this->authorize('view', $achievement);
         return $achievement;
     }
     public function store(Request $request)
