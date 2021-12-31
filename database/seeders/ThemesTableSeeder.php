@@ -32,6 +32,7 @@ class ThemesTableSeeder extends Seeder
             for ($i = 0; $i <$num_themes; $i++) {
                 Theme::create([
                     'title' => $faker->sentence,
+                    'description' => $faker->sentence(),
                     'difficulty' => $faker->word,
                     'advance' => $faker->word,
                 ]);

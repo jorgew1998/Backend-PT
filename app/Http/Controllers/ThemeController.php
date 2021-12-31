@@ -36,6 +36,7 @@ class ThemeController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required|string|unique:themes',
+            'description' => 'required|string',
             'difficulty' => 'required|string',
             'advance' => 'required|string',
         ]);
@@ -74,6 +75,7 @@ class ThemeController extends Controller
         $this->authorize('update', $theme);
         $validatedData = $request->validate([
             'title' => 'string|unique:themes',
+            'description' => 'string',
             'difficulty' => 'string',
             'advance' => 'string',
         ]);

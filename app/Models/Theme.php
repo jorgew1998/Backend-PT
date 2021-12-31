@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Theme extends Model
 {
-    protected $fillable = ['title', 'difficulty','advance'];
+    protected $fillable = ['title','description','difficulty','advance'];
 
     //public static function boot()
     //{
