@@ -10,6 +10,7 @@ class ThemePolicy
 {
     use HandlesAuthorization;
 
+    //Función que verifica si el usuario posee el rol SUPERADMIN y le concede todos los permisos
     public function before(User $user, $ability)
     {
         if ($user->isGranted(User::ROLE_SUPERADMIN)) {
@@ -25,7 +26,7 @@ class ThemePolicy
      */
     public function viewAny(User $user)
     {
-        //return $user->isGranted(User::ROLE_USER);
+        //
     }
 
     /**
@@ -37,7 +38,7 @@ class ThemePolicy
      */
     public function view(User $user, Theme $theme)
     {
-        //return $user->isGranted(User::ROLE_USER);
+        //
     }
 
     /**
@@ -48,6 +49,7 @@ class ThemePolicy
      */
     public function create(User $user)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
@@ -60,6 +62,7 @@ class ThemePolicy
      */
     public function update(User $user, Theme $theme)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
@@ -72,6 +75,7 @@ class ThemePolicy
      */
     public function delete(User $user, Theme $theme)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 

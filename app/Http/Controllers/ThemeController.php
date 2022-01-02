@@ -10,30 +10,25 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ThemeController extends Controller
 {
+    //Función para la obtención la lista de temas
     public function index()
     {
-      //  $this->authorize('viewAny', Theme::class);
-
-       // $themeList = Theme::all();
-        //$themes = [];
-
-        //foreach ($themeList as $theme) {
-            //if($theme->user_id === auth()->user()->id){
-            //    $themes[] = $theme;
-          //  }
-        //}
-       // return response()-> json($themes, 200);
         return Theme::all();
     }
+
+    //Funcion para obtener un tema en específico
     public function show(Theme $theme)
     {
-        //$this->authorize('view', $theme);
         return $theme;
     }
+
+    //Funcion para la creación de temas
     public function store(Request $request)
     {
+        //Comprobación de permisos
         $this->authorize('create', Theme::class);
 
+        //Validación de los campos para crear un nuevo tema
         $validatedData = $request->validate([
             'title' => 'required|string|unique:themes',
             'description' => 'required|string',
@@ -41,38 +36,18 @@ class ThemeController extends Controller
             'advance' => 'required|string',
         ]);
 
-
-        //$theme = Theme::create($request->all());
-        //return response()->json($theme, 201);
-
-
-        //$users = User::all();
-       // $themes = $request['data'];
-
-       // foreach ($users as $user) {
-            // iniciamos sesión con este usuario
-          //  JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
-            // Y ahora con este usuario creamos algunos articulo
-           // foreach ($themes  as $key => $value) {
-             //   $title = $themes[$key]["title"];
-             //   $difficulty = $themes[$key]["difficulty"];
-             //   $advance = $themes[$key]["advance"];
-//
-              //  Theme::create([
-              //      'title' => $title,
-              //      'difficulty' => $difficulty,
-              //      'advance' => $advance,
-              //  ]);
-           // }
         $achievement = Theme::create($request->all());
-        //}
-
         return response()->json($achievement,201);
 
     }
+
+    //Función para la actualizacion de un tema en específico
     public function update(Request $request, Theme $theme)
     {
+        //Comprobación de permisos
         $this->authorize('update', $theme);
+
+        //Validación de los campos para actualizar un tema
         $validatedData = $request->validate([
             'title' => 'string|unique:themes',
             'description' => 'string',
@@ -80,55 +55,18 @@ class ThemeController extends Controller
             'advance' => 'string',
         ]);
 
-
         $theme->update($request->all());
         return response()->json($theme, 200);
     }
+
+    //Función para la eliminación de un tema en específico
     public function delete(Theme $theme)
     {
+        //Comprobación de permisos
         $this->authorize('delete', $theme);
+
         $theme->delete();
         return response()->json(null, 204);
     }
 
-    public function initialThemes (Request $request) {
-
-        $this->authorize('create', Theme::class);
-        $validatedData = $request->validate([
-            'title' => 'string',
-            'difficulty' => 'string',
-            'advance' => 'string',
-        ]);
-
-
-        //$List = json_decode($request, true);
-        $themes = $request['data'];
-
-        foreach ($themes  as $key => $value) {
-            $title = $themes[$key]["title"];
-            $difficulty = $themes[$key]["difficulty"];
-            $advance = $themes[$key]["advance"];
-
-           Theme::create([
-                'title' => $title,
-                'difficulty' => $difficulty,
-                'advance' => $advance,
-        ]);
-        }
-        return response()->json($request,201);
-
-    }
-
-    public function themesId() {
-
-        $themeList = Theme::all();
-        $themes = [];
-
-        foreach ($themeList as $theme) {
-            if($theme->user_id === auth()->user()->id){
-                $themes[] = $theme;
-            }
-        }
-        return response()->json(ThemeResource::collection($themes));
-    }
 }

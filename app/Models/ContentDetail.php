@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ContentDetail extends Model
 {
-
+    //Campos de la tabla ContentDetail
     protected $fillable = ['content_id','user_id','theme_id','date'];
 
+    //Función para determinar la autorización del usuario
     public static function boot()
     {
         parent::boot();
@@ -19,9 +20,7 @@ class ContentDetail extends Model
         });
     }
 
-    use HasFactory;
-
-
+    //Funciones correspondientes al modelo ContentDetail
 
     public function users()
     {
@@ -37,4 +36,5 @@ class ContentDetail extends Model
     {
         return $this->belongsTo('App\Models\Content');
     }
+
 }

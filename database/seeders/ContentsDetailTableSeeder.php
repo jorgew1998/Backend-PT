@@ -14,19 +14,7 @@ class ContentsDetailTableSeeder extends Seeder
      */
     public function run()
     {
+        //Vaciar la tabla
         ContentDetail::truncate();
-
-        $faker = \Faker\Factory::create();
-
-        $content_details = 3;
-
-        for ($i = 0; $i <$content_details; $i++) {
-            ContentDetail::create([
-                'content_id' => $faker->numberBetween(1,6),
-                'user_id' => $faker->numberBetween(1,11),
-                'theme_id' => $faker->numberBetween(1,6),
-                'date' => $faker->date,
-            ]);
-        }
     }
 }

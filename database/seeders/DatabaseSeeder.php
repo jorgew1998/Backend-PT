@@ -17,13 +17,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //Desactivar las restrcciones de claves foraneas momentaneamente
         Schema::disableForeignKeyConstraints();
+        //Ejecutar los seeders
         $this->call(UsersTableSeeder::class);
         $this->call(ThemesTableSeeder::class);
         $this->call(ContentsTableSeeder::class);
         $this->call(AchievementsTableSeeder::class);
-        //$this->call(AchievementDetail::class);
-        //$this->call(ContentDetail::class);
+        //Activar las restrcciones de claves foraneas nuevamente
         Schema::enableForeignKeyConstraints();
 
     }

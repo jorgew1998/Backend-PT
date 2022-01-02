@@ -8,19 +8,25 @@ use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
+    //Función para la obtención de la lista de contenidos
     public function index()
     {
-      //  $this->authorize('viewAny', Content::class);
         return Content::all();
     }
+
+    //Función para la obtención de un contenido en específico
     public function show(Content $content)
     {
-       // $this->authorize('view', $content);
         return $content;
     }
+
+    //Función para la creación de un nuevo contenido
     public function store(Request $request)
     {
+        //Comprobación de permisos
         $this->authorize('create', Content::class);
+
+        //Validación de los campos para crear un contenido
         $validatedData = $request->validate([
             'description' => 'required|string',
             'question' => 'required|string',
@@ -37,12 +43,16 @@ class ContentController extends Controller
         $path = $request->image->store('public/contents');
         $content->image = $path;
         $content->save();
-        //$content = Content::create($request->all());
         return response()->json($content, 201);
     }
+
+    //Función para la actualización de un contenido
     public function update(Request $request, Content $content)
     {
+        //Comprobación de permisos
         $this->authorize('update', $content);
+
+        //Validación de los campos para actualizar un contenido
         $validatedData = $request->validate([
             'description' => 'string',
             'question' => 'string',
@@ -59,58 +69,19 @@ class ContentController extends Controller
         return response()->json($content, 200);
     }
 
+    //Función para la obtención de una lista de contenidos de un tema en específico
     public function contents(Theme $theme) {
         return response()->json($theme->contents, 201);
     }
 
+    //Función para la eliminación de un contenido
     public function delete(Content $content)
     {
+        //Comprobación de permisos
         $this->authorize('delete', $content);
+
         $content->delete();
         return response()->json(null, 204);
     }
 
-    public function initialContents(Request $request) {
-
-        $this->authorize('create', Content::class);
-        $validatedData = $request->validate([
-            'description' => 'string',
-            'question' => 'string',
-            'answer_1' => 'string',
-            'answer_2' => 'string',
-            'answer_3' => 'string',
-            'answer_4' => 'string',
-            'feedback' => 'string',
-            'image' => 'image|dimensions:min_width=200,min_height=200',
-            'theme_id'=> 'exists:themes,id',
-        ]);
-
-        $contents = $request['data'];
-
-        foreach ($contents  as $key => $value) {
-
-            $description = $contents[$key]["description"];
-            $question = $contents[$key]["question"];
-            $answer1= $contents[$key]["answer_1"];
-            $answer2= $contents[$key]["answer_2"];
-            $answer3= $contents[$key]["answer_3"];
-            $answer4= $contents[$key]["answer_4"];
-            $feedback= $contents[$key]["feedback"];
-            $themeID= $contents[$key]["theme_id"];
-            $image= $contents[$key]["feedback"];
-
-            Content::create([
-                'description' => $description,
-                'question' => $question,
-                'answer_1' => $answer1,
-                'answer_2' => $answer2,
-                'answer_3' => $answer3,
-                'answer_4' => $answer4,
-                'feedback' => $feedback,
-                'theme_id' => $themeID,
-                'image' => $image,
-            ]);
-        }
-        return response()->json($request,201);
-    }
 }

@@ -13,6 +13,7 @@ class CreateAchievementDetailsTable extends Migration
      */
     public function up()
     {
+        //Creación de tabla detalle de logro con sus respectivos atributos
         Schema::create('achievement_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('achievement_id')

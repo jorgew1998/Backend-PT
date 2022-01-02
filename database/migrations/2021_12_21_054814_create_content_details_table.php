@@ -13,6 +13,8 @@ class CreateContentDetailsTable extends Migration
      */
     public function up()
     {
+        // Creación de tabla detalle contenido con sus respectivos atributos
+
         Schema::create('content_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('content_id')

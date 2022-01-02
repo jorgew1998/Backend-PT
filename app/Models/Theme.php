@@ -8,15 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class Theme extends Model
 {
+    //Campos de la tabla Theme
     protected $fillable = ['title','description','difficulty','advance'];
 
-    //public static function boot()
-    //{
-      //  parent::boot();
-        //static::creating(function ($theme) {
-          //  $theme->user_id = Auth::id();
-        //});
-    //}
+    //Funciones correspondientes al modelo Theme
 
     public function contents()
     {

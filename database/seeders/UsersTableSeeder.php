@@ -18,16 +18,34 @@ class UsersTableSeeder extends Seeder
         // Vaciar la tabla
         User::truncate();
 
+        //Llamada a la herramienta faker
         $faker = \Faker\Factory::create();
 
-        // Crear la misma clave para todos los usuarios
+        // Creación de 2 administardores
         $password = Hash::make('123123');
+
         User::create([
-            'name' => 'Administrador',
-            'email' => 'admin@prueba.com',
+            'name' => 'Administrador1',
+            'email' => 'admin1@gmail.com',
             'password' => $password,
+            'experience' => null,
+            'progress' => null,
+            'rank' => null,
+            'level' => null,
+            'role' => 'ROLE_SUPERADMIN'
         ]);
-        // Generar algunos usuarios para nuestra aplicacion
+        User::create([
+            'name' => 'Administrador2',
+            'email' => 'admin2@gmail.com',
+            'password' => $password,
+            'experience' => null,
+            'progress' => null,
+            'rank' => null,
+            'level' => null,
+            'role' => 'ROLE_SUPERADMIN'
+        ]);
+
+        // Generar usuarios ficticios
         for ($i = 0; $i < 10; $i++) {
             User::create([
                 'name' => $faker->name,

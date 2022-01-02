@@ -13,6 +13,8 @@ class CreateThemesTable extends Migration
      */
     public function up()
     {
+        //Creación de tabla temas con sus respectivos atributos
+
         Schema::create('themes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');

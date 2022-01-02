@@ -8,17 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class AchievementDetail extends Model
 {
+    //Campos de la tabla AchievementDetail
     protected $fillable = ['achievement_id', 'user_id','theme_id', 'content_id'];
 
+    //Función para determinar la autorización del usuario
     public static function boot()
     {
       parent::boot();
-    static::creating(function ($detail) {
+      static::creating(function ($detail) {
       $detail->user_id = Auth::id();
-    });
+      });
     }
 
-    use HasFactory;
+    //Funciones correspondientes al modelo AchievementDetail
 
     public function users()
     {
@@ -39,6 +41,5 @@ class AchievementDetail extends Model
     {
         return $this->belongsTo('App\Models\Content');
     }
-
 
 }

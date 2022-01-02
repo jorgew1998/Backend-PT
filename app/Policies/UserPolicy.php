@@ -9,6 +9,7 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    //Función que verifica si el usuario posee el rol SUPERADMIN y le concede todos los permisos
     public function before(User $user, $ability)
     {
         if ($user->isGranted(User::ROLE_SUPERADMIN)) {
@@ -24,6 +25,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
+        //Puede realizar esta accion si posee el rol de USER
         return $user->isGranted(User::ROLE_USER);
     }
 
@@ -35,6 +37,7 @@ class UserPolicy
      */
     public function all(User $user)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
@@ -47,6 +50,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
+        //Puede realizar esta accion si posee el rol de USER y los id de las tablas coinciden
         return $user->isGranted(User::ROLE_USER) &&  $user->id === $model->id;
     }
 
@@ -70,6 +74,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
+        //Puede realizar esta accion si posee el rol de USER y los id de las tablas coinciden
         return $user->isGranted(User::ROLE_USER) && $user->id === $model->id;
     }
 

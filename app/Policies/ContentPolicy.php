@@ -10,6 +10,7 @@ class ContentPolicy
 {
     use HandlesAuthorization;
 
+    //Función que verifica si el usuario posee el rol SUPERADMIN y le concede todos los permisos
     public function before(User $user, $ability)
     {
         if ($user->isGranted(User::ROLE_SUPERADMIN)) {
@@ -25,7 +26,7 @@ class ContentPolicy
      */
     public function viewAny(User $user)
     {
-       // return $user->isGranted(User::ROLE_USER);
+       //
     }
 
     /**
@@ -37,7 +38,7 @@ class ContentPolicy
      */
     public function view(User $user, Content $content)
     {
-       // return $user->isGranted(User::ROLE_USER);
+       //
     }
 
 
@@ -49,6 +50,7 @@ class ContentPolicy
      */
     public function create(User $user)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
@@ -61,6 +63,7 @@ class ContentPolicy
      */
     public function update(User $user, Content $content)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
@@ -73,6 +76,7 @@ class ContentPolicy
      */
     public function delete(User $user, Content $content)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
