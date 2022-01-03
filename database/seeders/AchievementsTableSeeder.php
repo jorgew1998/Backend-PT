@@ -19,23 +19,19 @@ class AchievementsTableSeeder extends Seeder
         //Vaciar la tabla
         Achievement::truncate();
 
+        //Llamada a la herramienta faker
         $faker = \Faker\Factory::create();
 
-        //Obtenemos la lista de usuarios
-        $users = User::all();
-        foreach ($users as $user) {
-            // iniciamos sesión con cada uno
-            JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
-
-            //Datos ficticios
-            $num_achievements = 3;
-            for ($j = 0; $j < $num_achievements; $j++) {
-                Achievement::create([
-                    'title' => $faker->sentence,
-                    'description' => $faker->sentence,
-                ]);
-            }
+        //Creación de logros ficticios
+        $num_achievements = 6;
+        for ($j = 0; $j < $num_achievements; $j++) {
+            Achievement::create([
+                'title' => $faker->sentence,
+                'item_1' => $faker->sentence,
+                'item_2' => $faker->sentence,
+                'item_3' => $faker->sentence,
+                'item_4' => $faker->sentence,
+            ]);
         }
-
     }
 }

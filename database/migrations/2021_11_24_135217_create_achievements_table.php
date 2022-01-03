@@ -13,15 +13,16 @@ class CreateAchievementsTable extends Migration
      */
     public function up()
     {
+        // Creación de tabla logros con sus respectivos atributos
+
         Schema::create('achievements', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('title');
-            $table->string('description');
+            $table->string('item_1');
+            $table->string('item_2');
+            $table->string('item_3');
+            $table->string('item_4');
             $table->string('image')->nullable();
-            $table->foreignId('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('restrict');
             $table->timestamps();
         });
     }

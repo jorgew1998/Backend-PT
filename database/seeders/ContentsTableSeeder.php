@@ -20,12 +20,13 @@ class ContentsTableSeeder extends Seeder
         //Vaciar la tabla
         Content::truncate();
 
+        //Llamada a la herramienta faker
         $faker = \Faker\Factory::create();
 
-        // Obtenemos todos los themas de la base de datps
+        // Obtenemos todos los temas de la base de datos
         $themes = Theme::all();
 
-        //Crear un contenido para cada tema
+        //Creación de un contenido para cada tema
         foreach ($themes as $theme) {
             Content::create([
                 'description' => $faker->sentence,

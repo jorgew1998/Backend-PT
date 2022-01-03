@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Content;
+use App\Models\ContentDetail;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ContentPolicy
+class ContentDetailPolicy
 {
     use HandlesAuthorization;
 
@@ -26,21 +26,22 @@ class ContentPolicy
      */
     public function viewAny(User $user)
     {
-       //
+        //Puede realizar esta accion si posee el rol de USER
+        return $user->isGranted(User::ROLE_USER);
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Content  $content
+     * @param  \App\Models\ContentDetail  $contentDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Content $content)
+    public function view(User $user, ContentDetail $contentDetail)
     {
-       //
+        //Puede realizar esta accion si posee el rol de USER y los id de las tablas coinciden
+        return $user->isGranted(User::ROLE_USER) && $user->id === $contentDetail->user_id;
     }
-
 
     /**
      * Determine whether the user can create models.
@@ -50,31 +51,31 @@ class ContentPolicy
      */
     public function create(User $user)
     {
-        //Puede realizar esta accion si posee el rol de SUPERADMIN
-        return $user->isGranted(User::ROLE_SUPERADMIN);
+        //Puede realizar esta accion si posee el rol de USER
+        return $user->isGranted(User::ROLE_USER);
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Content  $content
+     * @param  \App\Models\ContentDetail  $contentDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Content $content)
+    public function update(User $user, ContentDetail $contentDetail)
     {
-        //Puede realizar esta accion si posee el rol de SUPERADMIN
-        return $user->isGranted(User::ROLE_SUPERADMIN);
+        //Puede realizar esta accion si posee el rol de USER y los id de las tablas coinciden
+        return $user->isGranted(User::ROLE_USER) && $user->id === $contentDetail->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Content  $content
+     * @param  \App\Models\ContentDetail  $contentDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Content $content)
+    public function delete(User $user, ContentDetail $contentDetail)
     {
         //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
@@ -84,10 +85,10 @@ class ContentPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Content  $content
+     * @param  \App\Models\ContentDetail  $contentDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Content $content)
+    public function restore(User $user, ContentDetail $contentDetail)
     {
         //
     }
@@ -96,10 +97,10 @@ class ContentPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Content  $content
+     * @param  \App\Models\ContentDetail  $contentDetail
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Content $content)
+    public function forceDelete(User $user, ContentDetail $contentDetail)
     {
         //
     }

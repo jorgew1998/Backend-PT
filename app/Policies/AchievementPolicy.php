@@ -10,6 +10,7 @@ class AchievementPolicy
 {
     use HandlesAuthorization;
 
+    //Función que verifica si el usuario posee el rol SUPERADMIN y le concede todos los permisos
     public function before(User $user, $ability)
     {
         if ($user->isGranted(User::ROLE_SUPERADMIN)) {
@@ -25,7 +26,7 @@ class AchievementPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isGranted(User::ROLE_USER);
+      //
     }
 
     /**
@@ -37,7 +38,7 @@ class AchievementPolicy
      */
     public function view(User $user, Achievement $achievement)
     {
-        return $user->isGranted(User::ROLE_USER) &&  $user->id === $achievement->user_id;
+        //
     }
 
     /**
@@ -48,7 +49,8 @@ class AchievementPolicy
      */
     public function create(User $user)
     {
-        return $user->isGranted(User::ROLE_USER);
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
+        return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
@@ -60,7 +62,8 @@ class AchievementPolicy
      */
     public function update(User $user, Achievement $achievement)
     {
-            return $user->isGranted(User::ROLE_SUPERADMIN) && $user->id === $achievement->user_id;
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
+            return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 
     /**
@@ -72,6 +75,7 @@ class AchievementPolicy
      */
     public function delete(User $user, Achievement $achievement)
     {
+        //Puede realizar esta accion si posee el rol de SUPERADMIN
         return $user->isGranted(User::ROLE_SUPERADMIN);
     }
 

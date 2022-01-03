@@ -8,18 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class Achievement extends Model
 {
-    protected $fillable = ['title', 'description','image'];
+    //Campos de la tabla Achievement
+    protected $fillable = ['title', 'item_1', 'item_2', 'item_3', 'item_4','image'];
 
-    public static function boot()
+    //Funciones correspondientes al modelo Achievement
+    public function achievemnts()
     {
-        parent::boot();
-        static::creating(function ($achievement) {
-            $achievement->user_id = Auth::id();
-        });
+        return $this->hasMany('App\Models\AchievementDetail');
     }
 
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User');
-    }
 }

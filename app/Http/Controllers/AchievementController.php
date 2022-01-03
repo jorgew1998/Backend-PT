@@ -7,32 +7,31 @@ use Illuminate\Http\Request;
 
 class AchievementController extends Controller
 {
+    //Función para la obtención la lista de logros
     public function index()
     {
-        $this->authorize('viewAny', Achievement::class);
-        $achievementsList = Achievement::all();
-        $achievements = [];
-
-        foreach ($achievementsList as $achievement) {
-            if($achievement->user_id === auth()->user()->id){
-                $achievements[] = $achievement;
-            }
-        }
-       // return Achievement::all();
-        return response()-> json($achievements, 200);
+        return Achievement::all();
     }
+
+    //Función para la obtención de un logro en específico
     public function show(Achievement $achievement)
     {
-        $this->authorize('view', $achievement);
         return $achievement;
     }
+
+    //Funcion para la creación de logros
     public function store(Request $request)
     {
+        //Comprobación de permisos
         $this->authorize('create', Achievement::class);
 
+        //Validación de los campos para crear un nuevo logro
         $validatedData = $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'title' => 'required|string|unique:achievements',
+            'item_1' => 'required|string',
+            'item_2' => 'required|string',
+            'item_3' => 'required|string',
+            'item_4' => 'required|string',
             'image' => 'required|image|dimensions:min_width=200,min_height=200',
         ]);
 
@@ -43,18 +42,28 @@ class AchievementController extends Controller
         //$achievement = Achievement::create($request->all());
         return response()->json($achievement, 201);
     }
+
+    //Función para la actualizacion de un logro en específico
     public function update(Request $request, Achievement $achievement)
     {
+        //Comprobación de permisos
         $this->authorize('update', $achievement);
+
+        //Validación de los campos para actualizar un logro
         $validatedData = $request->validate([
             'title' => 'string|unique:achievements',
-            'description' => 'string',
+            'item_1' => 'string',
+            'item_2' => 'string',
+            'item_3' => 'string',
+            'item_4' => 'string',
             'image' => 'image|dimensions:min_width=200,min_height=200',
         ]);
 
         $achievement->update($request->all());
         return response()->json($achievement, 200);
     }
+
+    //Función para la eliminación de un logro en específico
     public function delete(Achievement $achievement)
     {
         $this->authorize('delete', $achievement);
@@ -62,31 +71,4 @@ class AchievementController extends Controller
         return response()->json(null, 204);
     }
 
-    public function initialAchievements (Request $request) {
-
-        $this->authorize('create', Achievement::class);
-
-        $validatedData = $request->validate([
-            'title' => 'string',
-            'description' => 'string',
-            'image' => 'image|dimensions:min_width=200,min_height=200',
-        ]);
-
-        $achievements = $request["data"];
-
-        foreach ($achievements as $key => $value) {
-
-            $title = $achievements[$key]["title"];
-            $description = $achievements[$key]["description"];
-            $image = $achievements[$key]["image"];
-
-
-            Achievement::create([
-                'title' => $title,
-                'description' => $description,
-                'image' => $image,
-            ]);
-        }
-        return response()->json($request,201);
-    }
 }

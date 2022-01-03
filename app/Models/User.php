@@ -13,6 +13,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    //Definición de roles del sistema
     const ROLE_SUPERADMIN = 'ROLE_SUPERADMIN';
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_USER = 'ROLE_USER';
@@ -60,6 +61,8 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    //Funciones correspondientes al modelo User
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -71,12 +74,17 @@ class User extends Authenticatable implements JWTSubject
 
     public function achievements()
     {
-        return $this->hasMany('App\Models\Achievement');
+        return $this->hasMany('App\Models\AchievementDetail');
+    }
+
+    public function contents()
+    {
+        return $this->hasMany('App\Models\ContentDetail');
     }
 
     public function themes()
     {
-        return $this->hasMany('App\Models\Theme');
+        return $this->hasMany('App\Models\ThemeDetail');
     }
 
     public function isGranted($role)

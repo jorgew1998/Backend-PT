@@ -19,24 +19,18 @@ class ThemesTableSeeder extends Seeder
         //Vaciar tabla
         Theme::Truncate();
 
+        //Llamada a la herramienta faker
         $faker = \Faker\Factory::create();
 
-        //Obtenemos la lista de usuarios
-        $users = User::all();
-        foreach ($users as $user) {
-            // iniciamos sesión con cada uno
-            JWTAuth::attempt(['email' => $user->email, 'password' => '123123']);
 
-            //Crear temas ficticios
-            $num_themes = 6;
-            for ($i = 0; $i <$num_themes; $i++) {
-                Theme::create([
-                    'title' => $faker->sentence,
-                    'difficulty' => $faker->word,
-                    'advance' => $faker->word,
-                ]);
-            }
+        //Creación de temas ficticios
+        $num_themes = 6;
+        for ($i = 0; $i <$num_themes; $i++) {
+            Theme::create([
+                'title' => $faker->sentence,
+                'description' => $faker->sentence(),
+                'difficulty' => $faker->word,
+            ]);
         }
-
     }
 }

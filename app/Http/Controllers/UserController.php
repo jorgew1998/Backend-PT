@@ -10,19 +10,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
-    //public function authenticate(Request $request)
-    //{
-      //  $credentials = $request->only('email', 'password');
-        //try {
-          //  if (! $token = JWTAuth::attempt($credentials)) {
-            //    return response()->json(['error' => 'invalid_credentials'], 400);
-            //}
-        //} catch (JWTException $e) {
-          //  return response()->json(['error' => 'could_not_create_token'], 500);
-        //}
-        //return response()->json(compact('token'));
-    //}
-
+    //Función de autentición del sistema
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -50,6 +38,7 @@ class UserController extends Controller
             );
     }
 
+    //Función de registro del sistema
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -68,6 +57,8 @@ class UserController extends Controller
         $token = JWTAuth::fromUser($user);
         return response()->json(compact('user','token'),201);
     }
+
+    //Función de obtención del usuario autenticado del sistema
     public function getAuthenticatedUser()
     {
         try {
@@ -84,13 +75,14 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
+    //Función de cierre de sesió del sistema
     public function logout()
     {
         try {
             JWTAuth::invalidate(JWTAuth::getToken());
-//            Cookie::queue(Cookie::forget('token'));
-//            $cookie = Cookie::forget('token');
-//            $cookie->withSameSite('None');
+            //  Cookie::queue(Cookie::forget('token'));
+            //  $cookie = Cookie::forget('token');
+            //  $cookie->withSameSite('None');
             return response()->json([
                 "status" => "success",
                 "message" => "User successfully logged out."
@@ -110,31 +102,14 @@ class UserController extends Controller
         }
     }
 
-    public function index()
-    {
-
-        $this->authorize('viewAny', User::class);
-        $usersList = User::all();
-        $users = [];
-
-        foreach ($usersList as $user) {
-            if($user->id === auth()->user()->id){
-                $users[] = $user;
-            }
-        }
-
-        return response()-> json($users, 200);
-    }
+    //Funcion para la obtencion de los datos de un usuario en específico
     public function show(User $user)
     {
         $this->authorize('view', $user);
         return $user;
     }
-    //public function store(Request $request)
-    //{
-        //$user = User::create($request->all());
-      //  return response()->json($user, 201);
-    //}
+
+    //Funcion para actualiación de datos del usuario
     public function update(Request $request, User $user)
     {
         $this->authorize('update', $user);
@@ -149,14 +124,17 @@ class UserController extends Controller
         $user->update($request->all());
         return response()->json($user, 200);
     }
+    //Función para eliminación de usuario
     public function delete(User $user)
     {
         $user->delete();
         return response()->json(null, 204);
     }
 
+    //Función para la obtención de la lista de usuarios
     public function allUsers() {
         $this->authorize('all', User::class);
         return User::all();
     }
+
 }

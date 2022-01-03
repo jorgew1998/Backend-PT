@@ -13,15 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // Creación de tabla usuarios con sus respectivos atributos y valores por defecto
+
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('experience')->nullable();
-            $table->integer('progress')->nullable();
-            $table->string('rank')->nullable();
-            $table->integer('level')->nullable();
+            $table->integer('experience')->nullable()->default(0);
+            $table->integer('progress')->nullable()->default(0);
+            $table->string('rank')->nullable()->default('Principiante');
+            $table->integer('level')->nullable()->default(0);
             $table->string('role')->default(\App\Models\User::ROLE_USER);
             $table->rememberToken();
             $table->timestamps();
