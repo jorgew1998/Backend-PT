@@ -30,7 +30,6 @@ class ThemesTableSeeder extends Seeder
                 'title' => $faker->sentence,
                 'description' => $faker->sentence(),
                 'difficulty' => $faker->word,
-                'advance' => $faker->word,
             ]);
         }
     }

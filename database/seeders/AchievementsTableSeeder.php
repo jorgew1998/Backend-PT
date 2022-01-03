@@ -27,7 +27,10 @@ class AchievementsTableSeeder extends Seeder
         for ($j = 0; $j < $num_achievements; $j++) {
             Achievement::create([
                 'title' => $faker->sentence,
-                'description' => $faker->sentence,
+                'item_1' => $faker->sentence,
+                'item_2' => $faker->sentence,
+                'item_3' => $faker->sentence,
+                'item_4' => $faker->sentence,
             ]);
         }
     }

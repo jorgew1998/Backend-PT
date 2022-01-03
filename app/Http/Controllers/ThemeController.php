@@ -33,7 +33,6 @@ class ThemeController extends Controller
             'title' => 'required|string|unique:themes',
             'description' => 'required|string',
             'difficulty' => 'required|string',
-            'advance' => 'required|string',
         ]);
 
         $achievement = Theme::create($request->all());
@@ -52,7 +51,6 @@ class ThemeController extends Controller
             'title' => 'string|unique:themes',
             'description' => 'string',
             'difficulty' => 'string',
-            'advance' => 'string',
         ]);
 
         $theme->update($request->all());

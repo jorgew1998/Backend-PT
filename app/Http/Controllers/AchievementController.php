@@ -28,7 +28,10 @@ class AchievementController extends Controller
         //Validación de los campos para crear un nuevo logro
         $validatedData = $request->validate([
             'title' => 'required|string|unique:achievements',
-            'description' => 'required|string',
+            'item_1' => 'required|string',
+            'item_2' => 'required|string',
+            'item_3' => 'required|string',
+            'item_4' => 'required|string',
             'image' => 'required|image|dimensions:min_width=200,min_height=200',
         ]);
 
@@ -49,7 +52,10 @@ class AchievementController extends Controller
         //Validación de los campos para actualizar un logro
         $validatedData = $request->validate([
             'title' => 'string|unique:achievements',
-            'description' => 'string',
+            'item_1' => 'string',
+            'item_2' => 'string',
+            'item_3' => 'string',
+            'item_4' => 'string',
             'image' => 'image|dimensions:min_width=200,min_height=200',
         ]);
 

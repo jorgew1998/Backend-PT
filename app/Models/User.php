@@ -82,6 +82,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Models\ContentDetail');
     }
 
+    public function themes()
+    {
+        return $this->hasMany('App\Models\ThemeDetail');
+    }
+
     public function isGranted($role)
     {
         if ($role === $this->role) {

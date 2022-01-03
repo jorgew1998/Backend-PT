@@ -5,6 +5,7 @@ use App\Http\Controllers\AchievementDetailController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContentDetailController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\ThemeDetailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,13 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/contentsDetails', [ContentDetailController::class, 'store']);
     Route::put('/contentsDetails/{content}', [ContentDetailController::class, 'update']);
     Route::delete('/achievements/{content}', [ContentDetailController::class, 'delete']);
+
+    //Rutas para detalle de contenidos
+    Route::get('/themesDetails', [ThemeDetailController::class, 'index']);
+    Route::get('/themesDetails/{theme}', [ThemeDetailController::class, 'show']);
+    Route::post('/themesDetails', [ThemeDetailController::class, 'store']);
+    Route::put('/themesDetails/{theme}', [ThemeDetailController::class, 'update']);
+    Route::delete('/themes/{theme}', [ThemeDetailController::class, 'delete']);
 });
 
 

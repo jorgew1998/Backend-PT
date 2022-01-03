@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class Theme extends Model
 {
     //Campos de la tabla Theme
-    protected $fillable = ['title','description','difficulty','advance'];
+    protected $fillable = ['title','description','difficulty'];
 
     //Funciones correspondientes al modelo Theme
 
@@ -26,6 +26,11 @@ class Theme extends Model
     public function details()
     {
         return $this->hasMany('App\Models\ContentDetail');
+    }
+
+    public function advances()
+    {
+        return $this->hasMany('App\Models\ThemeDetail');
     }
 
 }
