@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Resources\User as UserResource;
 
 
 class UserController extends Controller
@@ -55,7 +56,7 @@ class UserController extends Controller
             'password' => Hash::make($request->get('password')),
         ]);
         $token = JWTAuth::fromUser($user);
-        return response()->json(compact('user','token'),201)
+        return response()->json(new UserResource($user, $token), 201)
             ->withCookie(
                 'token',
                 $token,
