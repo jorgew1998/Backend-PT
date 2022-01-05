@@ -55,7 +55,18 @@ class UserController extends Controller
             'password' => Hash::make($request->get('password')),
         ]);
         $token = JWTAuth::fromUser($user);
-        return response()->json(compact('user','token'),201);
+        return response()->json(compact('user','token'),201)
+            ->withCookie(
+                'token',
+                $token,
+                config('jwt.ttl'),
+                '/',
+                null,
+                config('app.env') !== 'local',
+                true,
+                false,
+                config('app.env') !== 'local' ? 'None': 'Lax'
+            );
     }
 
     //Función de obtención del usuario autenticado del sistema
