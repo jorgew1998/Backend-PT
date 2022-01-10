@@ -14,28 +14,35 @@ class UserController extends Controller
     //Función de autentición del sistema
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email');
+        $users = User::all();
+        $user = null;
+        foreach ($users as $u) {
+            if ($request->email === $u->email) {
+                $user = $u;
+            }
+        }
+
         try {
-            if (!$token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::fromUser($user)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);
             }
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
-        $user = User::all()->where('email', '=', $request->email);
-
-        return response()->json(compact('token', 'user'))
+        //$user = JWTAuth::user();
+        return response()->json(new UserResource($user, $token))
+            //return response()->json(compact('token', 'user'))
             ->withCookie(
                 'token',
                 $token,
-                config('jwt.ttl'),
-                '/',
-                null,
-                config('app.env') !== 'local',
-                true,
-                false,
-                config('app.env') !== 'local' ? 'None': 'Lax'
+                config('jwt.ttl'), // ttl => time to live
+                '/', // path
+                null, // domain
+                config('app.env') !== 'local', // Secure
+                true, // httpOnly
+                false, //
+                config('app.env') !== 'local' ? 'None' : 'Lax' // SameSite
             );
     }
 
@@ -56,6 +63,7 @@ class UserController extends Controller
             'password' => Hash::make($request->get('password')),
         ]);
         $token = JWTAuth::fromUser($user);
+
         return response()->json(new UserResource($user, $token), 201)
             ->withCookie(
                 'token',
@@ -66,7 +74,7 @@ class UserController extends Controller
                 config('app.env') !== 'local',
                 true,
                 false,
-                config('app.env') !== 'local' ? 'None': 'Lax'
+                config('app.env') !== 'local' ? 'None' : 'Lax'
             );
     }
 
@@ -84,7 +92,9 @@ class UserController extends Controller
         } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
             return response()->json(['token_absent'], $e->getStatusCode());
         }
-        return response()->json(compact('user'));
+
+        return response()->json(new UserResource($user), 200);
+
     }
 
     //Función de cierre de sesió del sistema
