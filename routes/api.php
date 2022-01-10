@@ -84,7 +84,7 @@ Route::post('/reset-password', function (Request $request) {
 Route::group(['middleware' => ['jwt.verify']], function() {
 
     //Rutas para usuarios
-    Route::get('user', [UserController::class, 'getAuthenticatedUser']);
+    Route::get('/user', [UserController::class, 'getAuthenticatedUser']);
     Route::get('/allUsers', [UserController::class, 'allUsers']);
     Route::get('/users/{user}', [UserController::class, 'show']);
     Route::post('logout', [UserController::class, 'logout']);
