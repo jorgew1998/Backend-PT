@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('experience')->nullable()->default(0);
             $table->integer('progress')->nullable()->default(0);
-            $table->string('rank')->nullable()->default('Principiante');
+            $table->string('rank')->nullable()->default('Cabo en ciberseguridad');
             $table->integer('level')->nullable()->default(0);
             $table->string('role')->default(\App\Models\User::ROLE_USER);
             $table->rememberToken();

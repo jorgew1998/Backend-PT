@@ -14,25 +14,17 @@ class UserController extends Controller
     //Función de autentición del sistema
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('email');
-        $users = User::all();
-        $user = null;
-        foreach ($users as $u) {
-            if ($request->email === $u->email) {
-                $user = $u;
-            }
-        }
-
+        $credentials = $request->only('email', 'password');
         try {
-            if (!$token = JWTAuth::fromUser($user)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['message' => 'invalid_credentials'], 400);
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json(['message' => 'could_not_create_token'], 500);
         }
-        //$user = JWTAuth::user();
+        $user = JWTAuth::user();
+
         return response()->json(new UserResource($user, $token))
-            //return response()->json(compact('token', 'user'))
             ->withCookie(
                 'token',
                 $token,
