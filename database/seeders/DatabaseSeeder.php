@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         //Ejecutar los seeders
         $this->call(UsersTableSeeder::class);
-        $this->call(ThemesTableSeeder::class);
-        $this->call(ContentsTableSeeder::class);
-        $this->call(AchievementsTableSeeder::class);
+        //$this->call(ThemesTableSeeder::class);
+        //$this->call(ContentsTableSeeder::class);
+        //$this->call(AchievementsTableSeeder::class);
         //Activar las restrcciones de claves foraneas nuevamente
         Schema::enableForeignKeyConstraints();
 

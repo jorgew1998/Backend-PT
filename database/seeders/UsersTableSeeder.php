@@ -46,17 +46,17 @@ class UsersTableSeeder extends Seeder
         ]);
 
         // Generar usuarios ficticios
-        for ($i = 0; $i < 10; $i++) {
-            User::create([
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'password' => $password,
-                'experience' => $faker->numerify('####'),
-                'progress'=> $faker->numerify('###'),
-                'rank' => $faker->word,
-                'level' => $faker->numerify('##')
-            ]);
-        }
+       // for ($i = 0; $i < 10; $i++) {
+         //   User::create([
+           //     'name' => $faker->name,
+           //     'email' => $faker->email,
+           //     'password' => $password,
+           //     'experience' => $faker->numerify('####'),
+           //     'progress'=> $faker->numerify('###'),
+           //     'rank' => $faker->word,
+           //     'level' => $faker->numerify('##')
+           // ]);
+        //}
 
     }
 }
