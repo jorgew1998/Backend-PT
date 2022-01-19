@@ -40,6 +40,7 @@ Route::get('/contents/{content}', [ContentController::class, 'show']);
 //Rutas publicas de logros
 Route::get('/achievements', [AchievementController::class, 'index']);
 Route::get('/achievements/{achievement}', [AchievementController::class, 'show']);
+Route::get('/achievements/{achievement}/image',[AchievementController::class, 'image']);
 
 //Rutas para recuperacion de contraseña
 Route::post('/forgot-password', function (Request $request) {

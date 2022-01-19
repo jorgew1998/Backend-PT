@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Achievement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AchievementController extends Controller
 {
@@ -17,6 +18,11 @@ class AchievementController extends Controller
     public function show(Achievement $achievement)
     {
         return $achievement;
+    }
+
+    public function image(Achievement $achievement)
+    {
+        return response()->download(public_path(Storage::url($achievement->image)));
     }
 
     //Funcion para la creación de logros
