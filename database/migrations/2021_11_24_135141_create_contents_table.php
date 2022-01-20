@@ -18,12 +18,12 @@ class CreateContentsTable extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('description');
-            $table->string('question');
-            $table->string('answer_1');
-            $table->string('answer_2');
-            $table->string('answer_3');
-            $table->string('answer_4');
-            $table->string('feedback');
+            $table->text('question');
+            $table->text('answer_1');
+            $table->text('answer_2');
+            $table->text('answer_3');
+            $table->text('answer_4');
+            $table->text('feedback');
             $table->string('image')->nullable();
             $table->foreignId('theme_id')
                 ->references('id')
