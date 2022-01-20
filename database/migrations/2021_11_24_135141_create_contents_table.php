@@ -17,7 +17,7 @@ class CreateContentsTable extends Migration
 
         Schema::create('contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('description');
+            $table->text('description');
             $table->string('question');
             $table->string('answer_1');
             $table->string('answer_2');
