@@ -42,10 +42,9 @@ class AchievementController extends Controller
         ]);
 
         $achievement = new Achievement($request->all());
-        $path = $request->image->store('public/achievements');
+        $path = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         $achievement->image = $path;
         $achievement->save();
-        //$achievement = Achievement::create($request->all());
         return response()->json($achievement, 201);
     }
 
