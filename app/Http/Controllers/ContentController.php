@@ -40,7 +40,7 @@ class ContentController extends Controller
         ]);
 
         $content = new Content($request->all());
-        $path = $request->image->store('public/contents');
+        $path = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         $content->image = $path;
         $content->save();
         return response()->json($content, 201);
