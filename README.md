@@ -73,7 +73,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 * IDE  (PhpStorm)
 * COMPOSER
 
-## Laravel installation
+### Laravel installation
 
 Execute the following command to install laravel globally on your pc
 
