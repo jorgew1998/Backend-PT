@@ -96,3 +96,11 @@ Create a MySQL database in XAMPP which will allow to connect to the Laravel proj
 ### Create the .env file
 
 Duplicate the .env.example file, rename it to .env and include the database connection data we indicated in the previous step.
+
+### Migrations
+
+Execute the following command to run the migrations and seeder of the project
+
+* php artisan migrate:fresh --seed
+
+That's all! Now the tables have been generated in your database.
