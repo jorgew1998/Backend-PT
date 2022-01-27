@@ -103,4 +103,4 @@ Execute the following command to run the migrations and seeder of the project
 
 * php artisan migrate:fresh --seed
 
-That's all! Now the tables have been generated in your database.
+### That's all! Now the tables have been generated in your database.
